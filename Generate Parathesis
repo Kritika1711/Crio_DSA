@@ -1,0 +1,23 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res=new ArrayList<>();
+        func(0,0,res,"",n);
+        return res;
+    }
+    public void func(int open,int close,List<String> res,String st,int n){
+         if (st.length() == n * 2) {
+            res.add(st);
+            return;
+        }
+        if(open<n){
+            
+            func(open+1,close,res,st+"(",n);
+           
+        }
+        if(close<open){
+            
+            func(open,close+1,res,st+")",n);
+            
+        }
+    }
+}
