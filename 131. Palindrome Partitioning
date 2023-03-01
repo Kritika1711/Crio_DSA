@@ -1,0 +1,29 @@
+public List<List<String>> partition(String s) {
+        List<List<String>> res=new ArrayList<>();
+        List<String> ans=new ArrayList<>();
+        helper(res,ans,s,0);
+        return res;
+    }
+    public void helper(List<List<String>> res,List<String> ans,String S,int i){
+        if(i==S.length()){
+            res.add(new ArrayList<>(ans));
+            return;
+        }
+        for(int ind=i;ind<S.length();ind++){
+            if(isPalindrome(S,i,ind)){
+                ans.add(S.substring(i,ind+1));
+               helper(res,ans,S,ind+1);
+               ans.remove(ans.size()-1);
+            }
+        }
+
+    }
+    public boolean isPalindrome(String S,int s, int e){
+        while(s<e){
+            if(S.charAt(s)!=(S.charAt(e))){
+                return false;
+            }
+            s++;e--;
+        }
+        return true;
+    }
