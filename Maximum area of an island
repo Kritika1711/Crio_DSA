@@ -1,0 +1,28 @@
+class Solution {
+    public int maxAreaOfIsland(int[][] grid) {
+         int n=grid.length;int m=grid[0].length;
+        int max_area=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==1){
+                    int result=areaOfIsland(grid,i,j,n,m);
+                    max_area=Math.max(result,max_area);
+                }
+            }
+        }
+        return max_area;
+    }
+    static int areaOfIsland(int[][] grid,int i,int j,int n,int m){
+        if(isValid(i,j,n,m) && grid[i][j]==1){
+            grid[i][j]=0;
+            return (1 + areaOfIsland(grid,i+1,j,n,m) + areaOfIsland(grid,i-1,j,n,m) + areaOfIsland(grid,i,j+1,n,m) + areaOfIsland(grid,i,j-1,n,m));
+        }
+        return 0;
+    }
+   static boolean isValid(int i,int j,int n,int m){
+        if(i>=0 && i<n && j>=0 && j<m){
+            return true;
+        }
+        return false;
+    }
+}
