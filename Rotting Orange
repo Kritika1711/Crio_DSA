@@ -1,0 +1,50 @@
+BFS
+
+public int orangesRotting(int[][] grid) {
+        int fresh=0;
+        
+        Queue<ArrayList<Integer>> q = new LinkedList<>();
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==1)fresh+=1;
+                if(grid[i][j]==2){
+                    ArrayList<Integer> temp=new ArrayList<>();
+                    temp.add(i);temp.add(j);
+
+                    q.add(temp);
+                }
+            }
+        }
+        int n=grid.length;int m=grid[0].length;
+        int[][] dir=new int[4][2];
+        dir[0][0]=1;dir[0][1]=0;
+        dir[1][0]=-1;dir[1][1]=0;
+        dir[2][0]=0;dir[2][1]=-1;
+        dir[3][0]=0;dir[3][1]=1;
+
+        if(fresh==0)return 0;
+        int time=0;
+        while(!q.isEmpty()){
+            int size=q.size();
+            while(size!=0){
+                ArrayList<Integer> temp=q.remove();
+
+                for(int i=0;i<dir.length;i++){
+                    int x = temp.get(0)+dir[i][0];
+                    int y=temp.get(1)+dir[i][1];
+                
+                    if(x>=0 && x<n && y>=0 && y<m && grid[x][y]==1){
+                        grid[x][y]=2;
+                        fresh-=1;
+                         ArrayList<Integer> temp2=new ArrayList<>();
+                         temp2.add(x);temp2.add(y);
+                        q.add(temp2);
+                    }
+                }
+                size--;
+            }
+            time++;
+        }
+        if(fresh>0)return -1;
+        return time-1;
+    }
