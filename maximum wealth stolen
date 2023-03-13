@@ -1,0 +1,24 @@
+He wants to steal the maximum possible wealth in one go, but needs to be cautious. He cannot steal from consecutive houses as that would trigger the security alarm.
+
+public static long houseThief(int n, int []nums) {
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp,0);
+        dp[0]=nums[0];
+        if(n>1){
+             dp[1]=Math.max(dp[0],nums[1]);
+        }
+       
+        for(int i=2;i<nums.length;i++){
+             if((nums[i]+dp[i-2])>dp[i-1]){
+                  dp[i]=nums[i]+dp[i-2];
+             }
+             else{
+                  dp[i]=dp[i-1];
+             }
+          //    System.out.println(dp[i]);
+              
+        }
+            
+        
+        return dp[n-1];
+	}
