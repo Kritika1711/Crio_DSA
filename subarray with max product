@@ -1,0 +1,13 @@
+ private static long maximumProductSubarray(Vector<Integer> nums){
+        int[] dp=new int[nums.size()];
+        dp[0]=nums.get(0);
+        for(int i=1;i<nums.size();i++){
+            dp[i]=Math.max(dp[i-1]*nums.get(i),nums.get(i));
+            System.out.print(dp[i]+" ");
+        }
+        if(nums.contains(0)){
+            return Math.max(0,dp[nums.size()-1]);
+        }
+        
+        return dp[nums.size()-1];
+    }
