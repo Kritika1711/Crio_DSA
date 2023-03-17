@@ -1,0 +1,11 @@
+ public static int beesToHives(int n,ArrayList<Integer> bp,ArrayList<Integer> hp){
+        Collections.sort(bp);   Collections.sort(hp);
+        int max=0;
+        for(int i=0;i<n;i++){
+            max= Math.max(max,Math.abs(hp.get(i)-bp.get(i)));
+        }
+        return max;
+ }
+    
+    sort both 
+    max
