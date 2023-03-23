@@ -1,0 +1,38 @@
+public int[][] insert(int[][] in, int[] nin) {
+        int[][] Intervals = new int[in.length+1][2];
+        for(int i=0;i<in.length;i++){
+            Intervals[i][0]=in[i][0];Intervals[i][1]=in[i][1];
+        }
+        Intervals[in.length][0]=nin[0];Intervals[in.length][1]=nin[1];
+      Arrays.sort(Intervals,(a,b)->a[0]-b[0]);
+    
+        Stack<Integer> start=new Stack<>();
+        Stack<Integer> end=new Stack<>();
+        start.push(Intervals[0][0]);
+        end.push(Intervals[0][1]);
+        int k=1;
+        for(int i=1;i<Intervals.length;i++){
+            if(Intervals[i][0]<=end.peek()){
+                int temp=end.pop();
+                end.push(Math.max(Intervals[i][1],temp));
+            }
+            else{
+                k++;
+                
+                start.push(Intervals[i][0]);
+                end.push(Intervals[i][1]);
+            }
+            //System.out.println(start.peek()+" "+end.peek());
+        }
+        int[][] res=new int[k][2];
+        int i=0;
+        while(k-->0){
+            res[i][0]=start.peek();
+            res[i][1]=end.peek();
+            i++;
+            start.pop();end.pop();
+        }
+        Arrays.sort(res,(a,b)->a[0]-b[0]);
+        return res;
+         
+    }
